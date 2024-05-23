@@ -24,7 +24,7 @@ const Room = ({
           toast.success("Room Code Copied!");
 
           await navigator.share({
-            text: `To join the meeting on PeerLink, click this link:\n${process.env.NEXT_PUBLIC_BASE_URL}/${room_code}\n\nOr open PeerLink and enter this code: ${room_code}`,
+            text: `To join the meeting on PeerLink, click this link:\n${process.env.NEXT_PUBLIC_BASE_URL}/room/${room_code}\n\nOr open PeerLink and enter this code: ${room_code}`,
           });
         }}
         className="flex mb-8 items-center justify-center rounded-full bg-primary px-5 py-2.5 text-regular text-white duration-300 ease-in-out hover:bg-primary-hover"
