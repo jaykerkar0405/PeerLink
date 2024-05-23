@@ -10,13 +10,19 @@ import { generate_room_code } from "@/modules";
 
 // App's External Imports
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 import { useUser } from "@auth0/nextjs-auth0/client";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const Room: React.FC = () => {
   const router = useRouter();
   const { user, isLoading } = useUser();
+  const search_params = useSearchParams();
   const [room_code, set_room_code] = useState<string>("");
+
+  if (search_params.get("error") === "occupied") {
+    toast.error("The room is currently occupied.", { id: "room_occupied" });
+  }
 
   if (!isLoading && !user) {
     router.push("/api/auth/login");

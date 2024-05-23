@@ -167,7 +167,7 @@ const Header: React.FC = () => {
                         href="/api/auth/login"
                         className="flex items-center justify-center rounded-full bg-primary w-full px-5 py-2.5 text-regular text-white duration-300 ease-in-out hover:bg-primary-hover"
                       >
-                        Login / Register
+                        Log In / Register
                       </a>
                     </div>
                   )}

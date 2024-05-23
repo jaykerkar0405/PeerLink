@@ -15,7 +15,7 @@ const Controls = ({
   toggle_video,
 }: controls_type) => {
   return (
-    <div className="flex mt-14 justify-center items-center lg:mt-12">
+    <div className="flex mt-12 justify-center items-center">
       <div className="flex gap-10">
         <button
           onClick={(event) => {

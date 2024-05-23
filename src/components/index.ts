@@ -2,6 +2,7 @@
 import dynamic from "next/dynamic";
 
 // App's Component Imports
+import Home from "./home";
 import Header from "./header";
 import Footer from "./footer";
 import Layout from "./layout";
@@ -17,6 +18,7 @@ const Controls = dynamic(() => import("./room/controls"), { ssr: false });
 
 // App's Component Exports
 export {
+  Home,
   Room,
   Stream,
   Header,

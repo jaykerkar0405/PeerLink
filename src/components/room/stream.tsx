@@ -35,6 +35,12 @@ const Stream = ({
   const router = useRouter();
   const client = useRTCClient();
 
+  const remote_users = useRemoteUsers();
+
+  if (remote_users.length > 1) {
+    router.push("/room?error=occupied");
+  }
+
   const [is_mounted, set_is_mounted] = useState<boolean>(false);
   const [toggle_mic, set_toggle_mic] = useState<boolean>(false);
   const [toggle_video, set_toggle_video] = useState<boolean>(false);
@@ -43,7 +49,6 @@ const Stream = ({
   const { isLoading: mic_loading, localMicrophoneTrack } =
     useLocalMicrophoneTrack();
 
-  const remote_users = useRemoteUsers();
   const device_loading = mic_loading || camera_loading;
   const { audioTracks } = useRemoteAudioTracks(remote_users);
 
@@ -73,8 +78,13 @@ const Stream = ({
   };
 
   const end_call = () => {
-    client.leave().then(() => {
-      router.push("/");
+    client.unpublish().then(() => {
+      localCameraTrack?.close();
+      localMicrophoneTrack?.close();
+
+      client.leave().then(() => {
+        router.push("/");
+      });
     });
   };
 
@@ -101,19 +111,18 @@ const Stream = ({
           <div className="flex bg-white dark:bg-[#121212] flex-col gap-8 lg:flex-row">
             <div className="w-full h-[52vh] lg:h-[50vh]">
               <div className="grid flex-1 gap-8 grid-cols-1 lg:grid-cols-2 h-full">
-                {remote_users.map((user) => (
-                  <RemoteUser
-                    user={user}
-                    className="w-full h-auto rounded-xl lg:rounded-2xl"
-                  />
-                ))}
+                {remote_users.length <= 1 &&
+                  remote_users.map((user) => (
+                    <RemoteUser
+                      user={user}
+                      className="w-full h-auto rounded-xl lg:rounded-2xl"
+                    />
+                  ))}
 
                 <div className="relative">
-                  {username && nickname && (
-                    <span className="z-20 absolute bottom-3 left-2 flex items-center justify-center rounded-full bg-primary px-4 py-2 text-sm text-white duration-300 ease-in-out hover:bg-primary-hover">
-                      {is_email(username) ? nickname : username}
-                    </span>
-                  )}
+                  <span className="z-20 absolute bottom-3 left-3 flex items-center justify-center rounded-full bg-primary px-4 py-2 text-sm text-white duration-300 ease-in-out hover:bg-primary-hover">
+                    You
+                  </span>
 
                   {toggle_mic && (
                     <span className="z-20 absolute bottom-3 right-3 flex items-center justify-center rounded-full bg-primary p-2 text-sm text-white duration-300 ease-in-out hover:bg-primary-hover">

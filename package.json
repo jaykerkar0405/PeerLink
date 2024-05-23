@@ -2,7 +2,7 @@
   "private": true,
   "license": "MIT",
   "name": "peerlink",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Jay Kerkar",
   "scripts": {
     "dev": "next dev",
