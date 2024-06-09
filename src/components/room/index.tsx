@@ -21,7 +21,7 @@ const Room = ({
           event.preventDefault();
 
           await navigator.clipboard.writeText(room_code);
-          toast.success("Room Code Copied!");
+          toast.success("Room Code Copied!", { id: "room_code_copied" });
 
           await navigator.share({
             text: `To join the meeting on PeerLink, click this link:\n${process.env.NEXT_PUBLIC_BASE_URL}/room/${room_code}\n\nOr open PeerLink and enter this code: ${room_code}`,

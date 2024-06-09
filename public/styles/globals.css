@@ -40,6 +40,9 @@
   .border-primary {
     @apply border-purple-700;
   }
+  .placeholder-none::placeholder {
+    text-transform: none;
+  }
 
   ::-webkit-scrollbar-thumb:hover {
     @apply bg-zinc-400;

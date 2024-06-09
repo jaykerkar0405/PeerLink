@@ -2,6 +2,7 @@
 
 // App's Internal Imports
 import { Room } from "@/components";
+import { validate_room_code } from "@/modules";
 
 // App's External Imports
 import { useRouter } from "next/navigation";
@@ -22,6 +23,10 @@ const RoomCode = ({
 
   if (!isLoading && !user) {
     router.push("/api/auth/login");
+  }
+
+  if (!validate_room_code(room_code)) {
+    router.push("/room?error=invalid_room_code");
   }
 
   return (

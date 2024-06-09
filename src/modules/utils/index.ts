@@ -1,4 +1,5 @@
 // App's External Imports
+import toast from "react-hot-toast";
 import { getValue, fetchAndActivate } from "firebase/remote-config";
 
 const fetch_remote_config = async (remote_config: any) => {
@@ -72,10 +73,33 @@ const generate_user_id = (): string => {
   return user_id;
 };
 
+const validate_room_code = (room_code: string): boolean => {
+  const pattern = /^[a-z]{3}-\d{4}-[a-z]{3}$/;
+
+  if (pattern.test(room_code)) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
+const toast_error = (error: string): void => {
+  switch (error) {
+    case "invalid_room_code":
+      toast.error("Invalid room code", { id: "invalid_room_code" });
+      break;
+    case "room_occupied":
+      toast.error("The room is currently occupied", { id: "room_occupied" });
+      break;
+  }
+};
+
 export {
   is_email,
+  toast_error,
   generate_user_id,
   generate_room_code,
+  validate_room_code,
   fetch_remote_config,
   fetch_profile_image,
 };

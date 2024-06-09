@@ -38,7 +38,7 @@ const Stream = ({
   const remote_users = useRemoteUsers();
 
   if (remote_users.length > 1) {
-    router.push("/room?error=occupied");
+    router.push("/room?error=room_occupied");
   }
 
   const [is_mounted, set_is_mounted] = useState<boolean>(false);
