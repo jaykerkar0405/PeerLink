@@ -65,9 +65,7 @@ const Room: React.FC = () => {
                 <div className="mb-9">
                   <Link
                     href={is_room_code_valid ? `/room/${room_code}` : "/room"}
-                    onClick={(event) => {
-                      event.preventDefault();
-
+                    onClick={() => {
                       if (!is_room_code_valid) {
                         toast.error("Invalid room code", {
                           id: "invalid_room_code",
